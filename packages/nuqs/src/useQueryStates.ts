@@ -67,7 +67,7 @@ const defaultUrlKeys = {}
  * @param keys - An object describing the keys to synchronise and how to
  *               serialise and parse them.
  *               Use `parseAs(String|Integer|Float|...)` for quick shorthands.
- * @param options - Optional history mode, shallow routing and scroll restoration options.
+ * @param options - Optional history mode, only for inertia, shallow routing and scroll restoration options.
  */
 export function useQueryStates<KeyMap extends UseQueryStatesKeysMap>(
   keyMap: KeyMap,
@@ -81,6 +81,7 @@ export function useQueryStates<KeyMap extends UseQueryStatesKeysMap>(
     history = 'replace',
     scroll = defaultOptions?.scroll ?? false,
     shallow = defaultOptions?.shallow ?? true,
+    only = defaultOptions?.only ?? undefined,
     throttleMs = defaultRateLimit.timeMs,
     limitUrlUpdates = defaultOptions?.limitUrlUpdates,
     clearOnDefault = defaultOptions?.clearOnDefault ?? true,
@@ -312,6 +313,7 @@ export function useQueryStates<KeyMap extends UseQueryStatesKeysMap>(
             // which take precedence over global options
             history: callOptions.history ?? parser.history ?? history,
             shallow: callOptions.shallow ?? parser.shallow ?? shallow,
+            only: callOptions.only ?? parser.only ?? only,
             scroll: callOptions.scroll ?? parser.scroll ?? scroll,
             startTransition:
               callOptions.startTransition ??
@@ -370,6 +372,7 @@ export function useQueryStates<KeyMap extends UseQueryStatesKeysMap>(
       stateKeys,
       history,
       shallow,
+      only,
       scroll,
       throttleMs,
       limitUrlUpdates?.method,
