@@ -35,6 +35,7 @@ export class ThrottledQueue {
     scroll: false,
     shallow: true,
     only: [],
+    except: [],
   }
   timeMs: number = defaultRateLimit.timeMs
   transitions: TransitionSet = new Set()
@@ -68,6 +69,9 @@ export class ThrottledQueue {
     }
     if (options.only) {
       this.options.only = options.only
+    }
+    if (options.except) {
+      this.options.except = options.except
     }
     // Keep the maximum finite throttle value (or set if previous was Infinity)
     if (!Number.isFinite(this.timeMs) || timeMs > this.timeMs) {
@@ -170,6 +174,7 @@ export class ThrottledQueue {
       scroll: false,
       shallow: true,
       only: [],
+      except: [],
     }
     this.timeMs = defaultRateLimit.timeMs
     return queuedKeys
