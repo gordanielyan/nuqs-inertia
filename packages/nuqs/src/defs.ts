@@ -33,8 +33,9 @@ export type Options = {
    */
   shallow?: boolean
 
-  only?: string[]|undefined
-  except?: string[]|undefined
+  only?: string[] | undefined
+  except?: string[] | undefined
+  reset?: string[] | undefined
 
   /**
    * Maximum amount of time (ms) to wait between updates of the URL query string.

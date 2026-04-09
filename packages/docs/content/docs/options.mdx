@@ -129,6 +129,25 @@ can opt-in to this behaviour:
 useQueryState('foo', { scroll: true })
 ```
 
+## Inertia partial reloads
+
+When using an Inertia adapter, nuqs can also carry partial reload options
+through hook-level and call-level updates:
+
+```ts
+useQueryState('search', {
+  only: ['users'],
+  except: ['stats'],
+  reset: ['users']
+})
+
+setState('alice', {
+  reset: ['users']
+})
+```
+
+Like the other options, call-level values override hook-level defaults.
+
 ## Rate-limiting URL updates
 
 Because of browsers rate-limiting the History API, updates **to the
@@ -393,6 +412,7 @@ adapter prop:
     shallow: false,
     scroll: true,
     clearOnDefault: false,
+    reset: ['users'],
     limitUrlUpdates: throttle(250),
   }}
 >

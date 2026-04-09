@@ -1,6 +1,9 @@
 import type { Options } from '../../defs'
 
-export type AdapterOptions = Pick<Options, 'history' | 'scroll' | 'shallow' | 'only' | 'except'>
+export type AdapterOptions = Pick<
+  Options,
+  'history' | 'scroll' | 'shallow' | 'only' | 'except' | 'reset'
+>
 
 export type UpdateUrlFunction = (
   search: URLSearchParams,

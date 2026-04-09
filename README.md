@@ -404,6 +404,24 @@ const [state, setState] = useQueryState('foo', { shallow: false })
 setState('bar', { shallow: false })
 ```
 
+### Inertia partial reloads
+
+When using an Inertia adapter, you can forward partial reload options through
+nuqs state updates:
+
+```ts
+useQueryState('search', {
+  only: ['users'],
+  except: ['stats'],
+  reset: ['users']
+})
+
+// Per-update overrides work too:
+setState('alice', { reset: ['users'] })
+```
+
+These options are passed through for the adapter to use with Inertia visits.
+
 ### Throttling URL updates
 
 Because of browsers rate-limiting the History API, internal updates to the
